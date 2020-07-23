@@ -1,0 +1,6 @@
+[submodule "aws-rds-crunchy-data-postgresql-9-stig-baseline"]
+	path = aws-rds-crunchy-data-postgresql-9-stig-baseline
+	url = https://github.com/mitre/aws-rds-crunchy-data-postgresql-9-stig-baseline.git
+[submodule "pgstigcheck-inspec"]
+	path = pgstigcheck-inspec
+	url = https://github.com/CrunchyData/pgstigcheck-inspec.git

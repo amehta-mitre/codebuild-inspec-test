@@ -1,4 +1,4 @@
-FROM aws/codebuild/amazonlinux2-x86_64-standard:2.0
+FROM aws/codebuild/amazonlinux2-x86_64-standard
 COPY aws-rds-crunchy-data-postgresql-9-stig-baseline/ /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/
 COPY pgstigcheck-inspec/ /share/pgstigcheck-inspec/
 COPY inspec.sh /share/inspec.sh

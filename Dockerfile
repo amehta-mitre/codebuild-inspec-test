@@ -4,6 +4,6 @@ COPY pgstigcheck-inspec/ /share/pgstigcheck-inspec/
 COPY inspec.sh /share/inspec.sh
 RUN yum install -y curl postgresql-client
 RUN yum install -y python3 
-RUN amazon-linux-extras install inspec
+RUN yum install -y inspec
 ENTRYPOINT ["sh"]
 CMD []

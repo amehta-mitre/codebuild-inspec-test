@@ -1,9 +1,11 @@
-FROM amazonlinux:latest
+FROM centos:7
 COPY aws-rds-crunchy-data-postgresql-9-stig-baseline/ /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/
 COPY pgstigcheck-inspec/ /share/pgstigcheck-inspec/
 COPY inspec.sh /share/inspec.sh
-RUN amazon-linux-extras install curl postgresql-client
-RUN amazon-linux-extras install python3 
-RUN amazon-linux-extras install inspec
+RUN yum install -y curl postgresql-client
+RUN yum install -y python3 
+RUN wget 'https://packages.chef.io/files/stable/inspec/4.22.1/el/7/inspec-4.22.1-1.el7.x86_64.rpm' -O /tmp/inspec-4.22.1-1.el7.x86_64.rpm
+RUN yum localinstall --nogpgcheck -y /tmp/inspec-4.22.1-1.el7.x86_64.rpm
+RUN wget 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -O "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install
 ENTRYPOINT ["sh"]
 CMD []

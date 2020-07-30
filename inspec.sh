@@ -9,17 +9,6 @@ echo "dont really know what this does"
 echo "getting ca bundle"
 wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 
-echo "install docker"
-dnf install docker
-echo "getting gpg and adding"
-curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-echo "add repo"
-apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-echo "update and install vault"
-apt-get update && sudo apt-get install vault
-
-
-
 #export RDSHOST="rdspostgres.abcdefghijk.us-west-2.rds.amazonaws.com"
 echo $RDSHOST
 echo "export pass"
@@ -35,7 +24,7 @@ echo 'psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=$PGUSER sslrootcert=/s
 psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=$PGUSER sslrootcert=/share/rds-combined-ca-bundle.pem sslmode=verify-ca"
 echo "ls"
 ls
-#inspec exec /share/aws-rds-crunchy-data-postgresql-9-stig-baseline --attrs /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/attributes.yaml --reporter cli json:/share/output/$OUTFILE
+inspec exec /share/aws-rds-crunchy-data-postgresql-9-stig-baseline --attrs /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/attributes.yaml --reporter cli json:/share/output/$OUTFILE
 echo "vault"
 vault --version
 echo "aws s3 upload"

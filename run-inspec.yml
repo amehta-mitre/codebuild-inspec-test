@@ -1,0 +1,50 @@
+- name: Execute commands for inspec 
+  hosts: localhost
+  vars: 
+    - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
+    - ri_config_params: [
+        { regexp: '^pg_dba_password', line: '{{ pgpassword.stdout }}'},
+        { regexp: '^pg_user_password', line: '{{ pgpassword.stdout }}'}
+      ]
+    - ri_output_dir: "/tmp/output" 
+  tasks:
+    - name: Get the date and time
+      shell: "date +%Y%m%d-%M:%S"
+      register: time
+    
+    - name: Create output directory
+      file: 
+        path: "{{ ri_output_dir }}"
+        state: directory
+      tags: run-inspec
+    
+    - name: Create tempoarary directory
+      tempfile:
+        state: directory
+      register: temp_dir
+ 
+    - name: Get AWS certificate files
+      get_url:
+        url: "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem"
+        dest: "{{ temp_dir.path }}/rds-combined-ca-bundle.pem"
+        validate_certs: no
+
+    - name: Get PGPASSWORD
+      shell: aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION
+      register: pgpassword
+
+    - name: Replace password 
+      lineinfile:
+        path: "docker/{{ ri_profile_name }}/attributes.yaml"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items: "{{ ri_config_params }}"
+
+    - name: Run the inspec yo
+      command: >
+        inspec exec /share/{{ ri_profile_name }} 
+        --attrs /share/{{ ri_profile_name }}/attributes.yaml
+        --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ date.stdout }}.json
+
+    - name: Upload to S3
+      command: aws s3 cp {{ ri_output_dir }}/{{ ri_profile_name }}-{{ date.stdout }}.json s3://$S3_BUCKET

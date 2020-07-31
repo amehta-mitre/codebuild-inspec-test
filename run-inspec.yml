@@ -44,7 +44,7 @@
       command: >
         inspec exec /share/{{ ri_profile_name }} 
         --attrs /share/{{ ri_profile_name }}/attributes.yaml
-        --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ date.stdout }}.json
+        --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 
     - name: Upload to S3
-      command: aws s3 cp {{ ri_output_dir }}/{{ ri_profile_name }}-{{ date.stdout }}.json s3://$S3_BUCKET
+      command: aws s3 cp {{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json s3://$S3_BUCKET

@@ -3,8 +3,8 @@
   vars: 
     - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
     - ri_config_params: [
-        { regexp: '^pg_dba_password', line: '{{ pgpassword.stdout }}'},
-        { regexp: '^pg_user_password', line: '{{ pgpassword.stdout }}'}
+        { regexp: '^pg_dba_password.*', line: 'pg_dba_password: {{ pgpassword.stdout }}'},
+        { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'}
       ]
     - ri_output_dir: "/tmp/output" 
   tasks:

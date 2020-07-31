@@ -40,6 +40,11 @@
         line: "{{ item.line }}"
       with_items: "{{ ri_config_params }}"
 
+    - name: Copy local inspec.yml configuration into profile_name directory
+      copy:
+        src: "inspec.yml"
+        dest: "{{ ri_profile_name }}/inspec.yml"
+
     - name: Run the inspec yo
       command: >
         inspec exec /share/{{ ri_profile_name }} 

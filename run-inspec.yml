@@ -42,13 +42,13 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: correcting port to 8080"
+        msg: "Run: correcting pg_port to $PGPORT"
 
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
         --input pg_host=$PG_HOST
-        --input pg_port=$PG_PORT 
+        --input pg_port=$PGPORT 
         --attrs /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 

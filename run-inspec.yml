@@ -41,6 +41,7 @@
       with_items: "{{ ri_config_params }}"
 
     - name: Decrease DNS Timeout
+      become: true
       lineinfile:
         path: "/etc/resolv.conf"
         regexp: 'options timeout.*'

@@ -40,8 +40,12 @@
         line: "{{ item.line }}"
       with_items: "{{ ri_config_params }}"
 
+    - name: Debug for run visibility
+      debug:
+        msg: "Run: fix for pg_host and command > shell"
+
     - name: Run the inspec yo
-      command: >
+      shell: >
         inspec exec /share/{{ ri_profile_name }}
         --input pg_host=$PG_HOST 
         --attrs /share/{{ ri_profile_name }}/attributes.yaml

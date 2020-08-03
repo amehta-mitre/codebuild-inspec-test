@@ -40,9 +40,15 @@
         line: "{{ item.line }}"
       with_items: "{{ ri_config_params }}"
 
+    - name: Decrease DNS Timeout
+      lineinfile:
+        path: "/etc/resolv.conf"
+        regexp: 'options timeout.*'
+        line: "options timeout:0.3"
+
     - name: Debug for run visibility
       debug:
-        msg: "Run: fix for pg_host and command > shell"
+        msg: "Run: fix DNS timeout"
 
     - name: Run the inspec yo
       shell: >

@@ -42,7 +42,8 @@
 
     - name: Run the inspec yo
       command: >
-        inspec exec /share/{{ ri_profile_name }} 
+        inspec exec /share/{{ ri_profile_name }}
+        --input pg_host=$PG_HOST 
         --attrs /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 

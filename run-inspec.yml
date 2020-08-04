@@ -6,6 +6,7 @@
         { regexp: '^pg_dba_password.*', line: 'pg_dba_password: {{ pgpassword.stdout }}'},
         { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'}
         { regexp: '^pg_user.*', line: "pg_user: {{ lookup('env','PGUSER') }}"},
+        { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"}
       ]
     - ri_output_dir: "/tmp/output" 
   tasks:
@@ -43,7 +44,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: Removing pg_repliacs definition"
+        msg: "Run: Correcting syntax and adding back pg_replicas" 
 
     - name: Run the inspec command
       shell: >

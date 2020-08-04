@@ -8,7 +8,7 @@
         { regexp: '^pg_dba.*', line: "pg_user: postgresu"},
         { regexp: '^pg_user.*', line: "pg_user: postgresu"},
         { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"},
-        { regexp: '^pg_host.*', line: "pg_host: 127.0.0.1"},
+        { regexp: '^pg_host.*', line: "pg_host: {{ lookup('env','PGHOST') }}"},
         { regexp: '^login_host.*', line: "login_host: {{ lookup('env','PGHOST') }}"},
         { regexp: '^login_user.*', line: "login_user: {{ lookup('env','PGUSER' ) }}"}
       ]

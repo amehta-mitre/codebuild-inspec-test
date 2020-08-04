@@ -7,7 +7,10 @@
         { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'},
         { regexp: '^pg_dba.*', line: "pg_user: postgresu"},
         { regexp: '^pg_user.*', line: "pg_user: postgresu"},
-        { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"}
+        { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"},
+        { regexp: '^pg_host.*', line: "pg_host: 127.0.0.1"},
+        { regexp: '^login_host.*', line: "login_host: {{ lookup('env','PGHOST') }}"},
+        { regexp: '^login_user.*', line: "login_user: {{ lookup('env','PGUSER' ) }}"}
       ]
     - ri_output_dir: "/tmp/output" 
   tasks:
@@ -50,14 +53,7 @@
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
-        --input pg_host=$PGHOST
-        --input pg_port=$PGPORT
-        --input pg_dba_password='{{ pgpassword.stdout }}'
-        --input pg_user=$PGUSER
-        --input pg_dba='postgresm'
-        --input login_user=$PGUSER
-        --input login_host=$PGHOST
-        #--input-file /share/{{ ri_profile_name }}/attributes.yaml
+        --input-file /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 
     - name: Upload to S3

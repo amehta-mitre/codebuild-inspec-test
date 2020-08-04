@@ -132,7 +132,7 @@ attributes:
   - name: pg_superusers
     description: 'Postgres super users'
     type: array
-    default: ['postgres']
+    default: ['postgresm']
 
   - name: pg_users
     description: 'Postgres users'
@@ -142,7 +142,7 @@ attributes:
   - name: pg_replicas
     description: 'Postgres replicas'
     type: array
-    default: ['192.168.1.3/32']
+    default: ['']
 
   - name: pg_max_connections
     description: 'Postgres max number of connections allowed'

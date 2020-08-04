@@ -48,10 +48,10 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: adding login command" 
+        msg: "Run: folder fix" 
     
     - name: Run login command
-      shell: psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=$PGUSER sslrootcert={{ temp_dir.path }}rds-combined-ca-bundle.pem sslmode=verify-ca"
+      shell: psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=$PGUSER sslrootcert={{ temp_dir.path }}/rds-combined-ca-bundle.pem sslmode=verify-ca"
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}

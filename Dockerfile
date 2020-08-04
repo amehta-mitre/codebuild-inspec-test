@@ -3,7 +3,6 @@ COPY aws-rds-crunchy-data-postgresql-9-stig-baseline/ /share/aws-rds-crunchy-dat
 COPY pgstigcheck-inspec/ /share/pgstigcheck-inspec/
 COPY inspec.sh /share/inspec.sh
 COPY run-inspec.yml /share/run-inspec.yml
-COPY inspec.yml /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/inspec.yml
 RUN yum install -y curl postgresql unzip python3 epel-release
 RUN yum update -y
 RUN yum install -y ansible git 

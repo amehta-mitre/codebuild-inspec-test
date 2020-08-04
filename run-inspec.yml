@@ -45,7 +45,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: Correcting pg_dba" 
+        msg: "Run: Correcting pg_dba; {{ lookup('env','PGHOST') }} - {{ lookup('env','PG_HOST') }}" 
 
     - name: Run the inspec command
       shell: >

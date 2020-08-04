@@ -57,7 +57,7 @@
         --input pg_dba='postgresm'
         --input login_user=$PGUSER
         --input login_host=$PGHOST
-        --input-file /share/{{ ri_profile_name }}/attributes.yaml
+        #--input-file /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 
     - name: Upload to S3

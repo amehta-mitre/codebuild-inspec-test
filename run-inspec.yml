@@ -5,9 +5,10 @@
     - ri_config_params: [
         { regexp: '^pg_dba_password.*', line: "pg_dba_password: '{{ lookup('env','PGPASSWORD') }}'"},
         { regexp: '^pg_user_password.*', line: "pg_user_password: '{{ lookup('env','PGPASSWORD') }}'"},
-        { regexp: '^pg_dba.*', line: "pg_user: postgresu"},
+        { regexp: '^pg_dba.*', line: "pg_user: postgresm"},
         { regexp: '^pg_user.*', line: "pg_user: postgresu"},
         { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"},
+        { regexp: '^pg_owner.*', line: "pg_owner: postgresm"},
         { regexp: '^pg_host.*', line: "pg_host: {{ lookup('env','PGHOST') }}"},
         { regexp: '^login_host.*', line: "login_host: {{ lookup('env','PGHOST') }}"},
         { regexp: '^login_user.*', line: "login_user: {{ lookup('env','PGUSER' ) }}"}

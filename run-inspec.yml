@@ -56,7 +56,7 @@
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
-        --input-file /share/{{ ri_profile_name }}/attributes.yaml
+        --attrs /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 
     - name: Upload to S3

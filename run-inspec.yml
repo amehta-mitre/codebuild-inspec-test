@@ -57,6 +57,8 @@
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
+        --input pg_user=postgresu
+        --input pg_dba=postgresm
         --attrs /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 

@@ -5,6 +5,7 @@
     - ri_config_params: [
         { regexp: '^pg_dba_password.*', line: 'pg_dba_password: {{ pgpassword.stdout }}'},
         { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'},
+        { regexp: '^pg_dba.*', line: "pg_user: postgresu"},
         { regexp: '^pg_user.*', line: "pg_user: postgresu"},
         { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"}
       ]
@@ -44,7 +45,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: Correcting pg_user" 
+        msg: "Run: Correcting pg_dba" 
 
     - name: Run the inspec command
       shell: >

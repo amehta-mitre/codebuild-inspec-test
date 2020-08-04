@@ -5,6 +5,8 @@
     - ri_config_params: [
         { regexp: '^pg_dba_password.*', line: 'pg_dba_password: {{ pgpassword.stdout }}'},
         { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'}
+        { regexp: '^pg_user.*', line: "pg_user: {{ lookup('env','PGUSER') }}"},
+        { regexp: '^pg_replicas.*', line: "pg_replicas: [ '', ]"},
       ]
     - ri_output_dir: "/tmp/output" 
   tasks:
@@ -42,7 +44,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: correcting --attrs to --input-file"
+        msg: "Run: Adding variables to reduce warn messages and correcting pg_user"
 
     - name: Run the inspec command
       shell: >

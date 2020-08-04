@@ -4,7 +4,7 @@
     - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
     - ri_config_params: [
         { regexp: '^pg_dba_password.*', line: 'pg_dba_password: {{ pgpassword.stdout }}'},
-        { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'}
+        { regexp: '^pg_user_password.*', line: 'pg_user_password: {{ pgpassword.stdout }}'},
         { regexp: '^pg_user.*', line: "pg_user: postgresu"},
         { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"}
       ]

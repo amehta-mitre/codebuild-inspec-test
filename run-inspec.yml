@@ -59,7 +59,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: adding superuser?" 
+        msg: "Run: deprecation changes, profile added to the inspec.yml" 
     
     - name: Run the inspec command
       shell: >

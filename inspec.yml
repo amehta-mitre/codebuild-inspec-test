@@ -15,7 +15,7 @@ supports:
   - platform: aws
   - platform-family: redhat
 
-inspec_version: "~> 4.0"
+inspec_version: "~> 3.0"
 
 depends:
 - name: pgstigcheck-inspec
@@ -42,7 +42,7 @@ attributes:
   - name: pg_dba
     description: 'Postgres database admin user'
     type: string
-    default: 'root'
+    default: 'postgresm'
 
   - name: pg_dba_password
     description: 'Postgres database admin password'
@@ -52,7 +52,7 @@ attributes:
   - name: pg_user
     description: 'Postgres normal user'
     type: string
-    default: ''
+    default: 'postgresu'
 
   - name: pg_user_password
     description: 'Postgres normal user password'

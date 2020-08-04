@@ -27,7 +27,7 @@ attributes:
   - name: pg_owner
     description: 'Postgres OS user'
     type: string
-    default: 'postgres'
+    default: 'postgresm'
 
   - name: pg_group
     description: 'Postgres OS group'

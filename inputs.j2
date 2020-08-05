@@ -6,9 +6,9 @@
 # programmatic deployment or validation of different deployment patterns without
 # having to adjust the core profile.
 
-pg_owner: 'postgres'
+pg_owner: '{{ pg_dba }}'
 pg_group: 'postgres'
-pg_owner_password: 'postgres'
+pg_owner_password: '{{ pg_dba_password }}'
 
 pg_dba: '{{ pg_dba }}'
 

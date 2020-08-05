@@ -1,14 +1,14 @@
 - name: Execute commands for inspec 
   hosts: localhost
   vars: 
-    - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
-    - pg_dba_password: 'password'
-    - pg_user_password: "{{ pgpassword.stdout }}"
-    - pg_user: 'postgresu'
-    - pg_port: "{{ lookup('env','PGPORT') }}"
-    - pg_dba: 'postgresm'
-    - pg_host: "{{ lookup('env','PGHOST') }}"
-    - ri_output_dir: "/tmp/output" 
+    ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
+    pg_dba_password: 'password'
+    pg_user_password: "{{ pgpassword.stdout }}"
+    pg_user: 'postgresu'
+    pg_port: "{{ lookup('env','PGPORT') }}"
+    pg_dba: 'postgresm'
+    pg_host: "{{ lookup('env','PGHOST') }}"
+    ri_output_dir: "/tmp/output" 
   tasks:
     - name: Get the date and time
       shell: "date +%Y%m%d-%M:%S"

@@ -22,10 +22,37 @@
     
     - name: Create output directory
       file: 
-        path: "{{ ri_output_dir }}"
+        path: "{{ item }}"
         state: directory
+      with_items:
+        - "{{ ri_output_dir }}"
+        - "/share/{{ ri_profile_name }}/libraries/"
+        - "/share/pgstigcheck-inspec/libraries/"
       tags: run-inspec
-    
+  
+    - name: Find all .rb files for patching of postgres_session calls
+      find:
+        paths: ['/share/pgstigcheck-inspec/controls']
+        patterns: '*.rb'
+      register: inspec_control
+      tags: run-inspec
+
+    - name: Replace all postgres_session calls to include port
+      lineinfile:
+        regexp: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'))"
+        line: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'), input('pg_port'))"
+        paths: '/share/{{ ri_profile_name }}/controls/'
+      tags: run-inspec
+
+    - name: Replace all postgres_session calls in orginal source
+      lineinfile:
+        path: "{{ item.path }}"
+        regexp: "postgres_session(pg_dba, pg_dba_password, pg_host)"
+        line: "postgres_session(pg_dba, pg_dba_password, pg_host, pg_port)"
+      with_items: 
+         - "{{ inspec_control.files }}"
+      tags: run-inspec
+  
     - name: Create tempoarary directory
       tempfile:
         state: directory
@@ -45,7 +72,7 @@
       debug:
         msg: "{{ pgpassword }}"
 
-    - name: Replace password 
+    - name: Replace attribute parameters with overrides 
       lineinfile:
         path: "{{ ri_profile_name }}/attributes.yaml"
         regexp: "{{ item.regexp }}"
@@ -59,15 +86,14 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: deprecation changes, profile added to the inspec.yml" 
+        msg: "Run: syntax repair2" 
     
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
         --input pg_user='postgresu'
-        --input pg_dba=postgresm
-        --input pg_owner=postgresm
-        --input login_user=postgresm
+        --input pg_dba='postgresm'
+        --input pg_owner='postgresm'
         --input-file /share/{{ ri_profile_name }}/attributes.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 

@@ -64,7 +64,7 @@
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
-        --input pg_user=postgresu
+        --input pg_user='postgresu'
         --input pg_dba=postgresm
         --input pg_owner=postgresm
         --input login_user=postgresm

@@ -86,7 +86,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: syntax repair" 
+        msg: "Run: syntax repair2" 
     
     - name: Run the inspec command
       shell: >

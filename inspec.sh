@@ -30,3 +30,4 @@ inspec exec /share/aws-rds-crunchy-data-postgresql-9-stig-baseline --attrs /shar
 
 echo "aws s3 upload"
 aws s3 cp /share/output/$OUTFILE s3://$S3_BUCKET
+

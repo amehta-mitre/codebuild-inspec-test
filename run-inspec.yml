@@ -81,7 +81,18 @@
     - name: Debug for run visibility
       debug:
         msg: "Run: template approach" 
-    
+
+    - name: Remove inspec cache and inspec.lock file
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "~/.inspec/cache/"
+        - "/share/{{ ri_profile_name }}/inspec.lock"
+   
+    - name: Sync down inspec remote data
+      command: "inspec vendor . --overwrite"
+ 
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}

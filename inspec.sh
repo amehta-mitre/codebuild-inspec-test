@@ -25,8 +25,8 @@ echo 'psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=$PGUSER sslrootcert=/s
 psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=$PGUSER sslrootcert=/share/rds-combined-ca-bundle.pem sslmode=verify-ca"
 echo "ls"
 ls
+echo "run dat inspec"
 inspec exec /share/aws-rds-crunchy-data-postgresql-9-stig-baseline --attrs /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/attributes.yaml --reporter cli json:/share/output/$OUTFILE
-echo "vault"
-vault --version
+
 echo "aws s3 upload"
 aws s3 cp /share/output/$OUTFILE s3://$S3_BUCKET

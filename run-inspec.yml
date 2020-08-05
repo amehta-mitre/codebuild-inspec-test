@@ -39,8 +39,8 @@
 
     - name: Replace all postgres_session calls to include port
       lineinfile:
-        regexp: 'postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'))'
-        line: 'postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'), input('pg_port'))'
+        regexp: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'))"
+        line: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'), input('pg_port'))"
         paths: '/share/{{ ri_profile_name }}/controls/'
       tags: run-inspec
 

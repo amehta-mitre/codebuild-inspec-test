@@ -6,22 +6,21 @@
 # programmatic deployment or validation of different deployment patterns without
 # having to adjust the core profile.
 
-pg_owner: 'postgres'
+pg_owner: 'postgresm'
 pg_group: 'postgres'
-pg_owner_password: 'postgres'
+pg_owner_password: 'password'
 
-pg_dba: 'postgres'
+pg_dba: 'postgresm'
+pg_dba_password: 'password'
 
-pg_dba_password: 'postgres'
-
-pg_user: 'postgres'
-pg_user_password: 'postgres'
+pg_user: 'postgresm'
+pg_user_password: 'password'
 
 pg_ver: '9.5'
-pg_host: 'b.c6bqe8whcxdo.us-east-2.rds.amazonaws.com'
-pg_port: '5432'
+pg_host: 'manual-ssl-iam-db-amehta.c3iajtgkafbi.us-east-1.rds.amazonaws.com'
+pg_port: '8080'
 
-pg_db: 'postgres'
+pg_db: 'dbname'
 pg_table: 'stig_test_table'
 
 # priv user account that can login to the postgres host

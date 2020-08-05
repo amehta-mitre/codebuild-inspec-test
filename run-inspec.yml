@@ -90,8 +90,8 @@
         - "~/.inspec/cache/"
         - "/share/{{ ri_profile_name }}/inspec.lock"
    
-    - name: Sync down inspec remote data
-      command: "inspec vendor . --overwrite"
+    #- name: Sync down inspec remote data
+    #  command: "inspec vendor . --overwrite"
  
     - name: Run the inspec command
       shell: >

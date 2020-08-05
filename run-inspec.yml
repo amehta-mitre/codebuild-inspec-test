@@ -41,7 +41,7 @@
       lineinfile:
         regexp: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'))"
         line: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'), input('pg_port'))"
-        path: '/share/{{ ri_profile_name }}/controls/'
+        path: '/share/{{ ri_profile_name }}/controls/overlay.rb'
       tags: run-inspec
 
     - name: Replace all postgres_session calls in orginal source

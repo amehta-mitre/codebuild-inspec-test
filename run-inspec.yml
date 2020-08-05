@@ -99,7 +99,7 @@
         --input pg_user='postgresu'
         --input pg_dba='postgresm'
         --input-file /share/{{ ri_profile_name }}/inputs.yaml
-        --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
+        --reporter cli json:{{ ri_output_dir }}/ansible-{{ time.stdout }}.json || true
 
     - name: Upload to S3
-      command: aws s3 cp {{ ri_output_dir }}/ansible-{{ time.stdout }}.json s3://$S3_BUCKET
+      shell: aws s3 cp {{ ri_output_dir }}/ansible-{{ time.stdout }}.json s3://$S3_BUCKET

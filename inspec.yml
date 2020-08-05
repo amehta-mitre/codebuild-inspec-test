@@ -173,3 +173,4 @@ inputs:
     description: 'List of database objects that should be excepted from tests'
     type: array
     value: ['pg_settings']
+

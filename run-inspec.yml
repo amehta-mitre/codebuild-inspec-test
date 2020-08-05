@@ -33,7 +33,7 @@
     - name: Find all .rb files for patching of postgres_session calls
       find:
         paths: ['/share/pgstigcheck-inspec/controls']
-        patterns '*.rb'
+        patterns: '*.rb'
       register: inspec_control
       tags: run-inspec
 
@@ -86,7 +86,7 @@
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: syntax repair and overhaul" 
+        msg: "Run: syntax repair" 
     
     - name: Run the inspec command
       shell: >

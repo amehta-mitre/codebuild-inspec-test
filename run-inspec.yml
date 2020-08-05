@@ -5,6 +5,7 @@
     - pg_dba_password: 'password'
     - pg_user_password: "{{ pgpassword.stdout }}"
     - pg_user: 'postgresu'
+    - pg_port: "{{ lookup('env','PGPORT') }}"
     - pg_dba: 'postgresm'
     - pg_host: "{{ lookup('env','PGHOST') }}"
     - ri_output_dir: "/tmp/output" 

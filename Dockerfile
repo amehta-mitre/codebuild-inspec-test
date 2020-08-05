@@ -6,6 +6,7 @@ COPY postgres_session.rb /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/
 COPY postgres_session.rb /share/pgstigcheck-inspec/libraries/postgres_session.rb
 COPY inspec.yml /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/inspec.yml
 COPY inputs.j2 /share/inputs.j2
+COPY overlay.rb /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/controls/overlay.rb
 COPY run-inspec.yml /share/run-inspec.yml
 RUN yum install -y curl postgresql unzip python3 epel-release
 RUN yum update -y

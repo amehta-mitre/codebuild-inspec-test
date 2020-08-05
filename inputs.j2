@@ -25,12 +25,13 @@ pg_db: '{{ lookup('env','PGDATABASE' ) }}'
 pg_table: 'stig_test_table'
 
 # priv user account that can login to the postgres host
-login_user: 'postgresm'
+login_user: 'vagrant'
 login_host: '127.0.0.1'
-pg_data_dir: /var/lib/pgsql/9.5/data
-pg_conf_file: /var/lib/pgsql/9.5/data/postgresql.conf
-pg_hba_conf_file: /var/lib/pgsql/9.5/data/pg_hba.conf
-pg_ident_conf_file: /var/lib/pgsql/9.5/data/pg_ident.conf
+pg_data_dir: /rdsdbdata/db/data
+pg_conf_file: /rdsdbdata/config/postgresql.conf
+pg_hba_conf_file: /rdsdbdata/config/pg_hba.conf
+pg_ident_conf_file: /rdsdbdata/config/pg_ident.conf
+pg_user_defined_conf: ['/rdsdbdata/db/data/stig-postgresql.conf']
 
 pg_shared_dirs: [
   "/usr/pgsql-${pg_ver}",
@@ -48,6 +49,7 @@ pg_doc_roles:
 pg_conf_mode: '0600'
 pg_ssl: 'on'
 pg_log_dest: 'syslog'
+pg_version: "{{ pg_version }}"
 pg_syslog_facility: ['local0']
 pg_syslog_owner: 'postgres' # should this default to PG_OWNER?
 
@@ -57,4 +59,5 @@ pgaudit_log_line_items: ['%m','%u','%c']
 client_min_mesg: 'error'
 pg_max_connections: '3'
 pg_timezone: 'UTC'
-pg_superusers: []
+pg_superusers: ['',]
+pg_replicas: ['',]

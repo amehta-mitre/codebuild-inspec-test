@@ -13,6 +13,7 @@ COPY inspec.yml /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/inspec.ym
 #RUN yum install -y curl postgresql unzip python3 epel-release
 #RUN yum update -y
 #RUN yum install -y ansible git 
+COPY attributes.yaml /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/attributes.yaml
 RUN apk add curl postgresql-client unzip python3
 RUN apk add ansible git
 

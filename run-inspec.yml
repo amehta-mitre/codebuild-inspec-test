@@ -3,16 +3,16 @@
   vars: 
     - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
     - ri_config_params: [
-        { regexp: '^pg_dba_password.*', line: "pg_dba_password: 'password'"},
-        { regexp: '^pg_user_password.*', line: "pg_user_password: '{{ pgpassword.stdout }}'"},
-        { regexp: '^pg_dba.*', line: "pg_user: postgresm"},
-        { regexp: '^pg_user.*', line: "pg_user: postgresu"},
-        { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"},
-        { regexp: '^pg_owner.*', line: "pg_owner: postgresm"},
-        { regexp: '^pg_host.*', line: "pg_host: {{ lookup('env','PGHOST') }}"},
-        { regexp: '^login_host.*', line: "login_host: {{ lookup('env','PGHOST') }}"},
-        { regexp: '^pg_superusers.*', line: "pg_superusers: ['postgresm',]"},
-        { regexp: '^login_user.*', line: "login_user: {{ lookup('env','PGUSER' ) }}"}
+        { regexp: '^pg_dba_password:.*', line: "pg_dba_password: 'password'"},
+        { regexp: '^pg_user_password:.*', line: "pg_user_password: '{{ pgpassword.stdout }}'"},
+        { regexp: '^pg_dba:.*', line: "pg_user: postgresm"},
+        { regexp: '^pg_user:.*', line: "pg_user: postgresu"},
+        { regexp: '^pg_replicas:.*', line: "pg_replicas: ['',]"},
+        { regexp: '^pg_owner:.*', line: "pg_owner: postgresm"},
+        { regexp: '^pg_host:.*', line: "pg_host: {{ lookup('env','PGHOST') }}"},
+        { regexp: '^login_host:.*', line: "login_host: {{ lookup('env','PGHOST') }}"},
+        { regexp: '^pg_superusers:.*', line: "pg_superusers: ['postgresm',]"},
+        { regexp: '^login_user:.*', line: "login_user: {{ lookup('env','PGUSER' ) }}"}
       ]
     - ri_output_dir: "/tmp/output" 
   tasks:

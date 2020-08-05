@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "setting outfile"
-OUTFILE="$(date -u +%Y%m%d%H%M%S).json"
+OUTFILE="/share/output/$(date -u +%Y%m%d%H%M%S).json"
 
 echo "dont really know what this does"
 [ ! -d /share/output ] && mkdir /share/output

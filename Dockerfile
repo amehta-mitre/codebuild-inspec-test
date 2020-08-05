@@ -17,7 +17,10 @@ RUN apk add ansible git
 
 #RUN curl 'https://packages.chef.io/files/stable/inspec/4.22.1/el/7/inspec-4.22.1-1.el7.x86_64.rpm' -o /tmp/inspec.rpm
 #RUN yum localinstall --nogpgcheck -y /tmp/inspec.rpm
+#RUN curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
+RUN apk add --no-cache python py-pip
+RUN pip install awscli
+RUN aws --version
 
-RUN curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
 ENTRYPOINT ["sh"]
 CMD []

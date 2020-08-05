@@ -2,18 +2,11 @@
   hosts: localhost
   vars: 
     - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
-    - ri_config_params: [
-        { regexp: '^pg_dba_password:.*', line: "pg_dba_password: 'password'"},
-        { regexp: '^pg_user_password:.*', line: "pg_user_password: '{{ pgpassword.stdout }}'"},
-        { regexp: '^pg_dba:.*', line: "pg_user: postgresm"},
-        { regexp: '^pg_user:.*', line: "pg_user: postgresu"},
-        { regexp: '^pg_replicas:.*', line: "pg_replicas: ['',]"},
-        { regexp: '^pg_owner:.*', line: "pg_owner: postgresm"},
-        { regexp: '^pg_host:.*', line: "pg_host: {{ lookup('env','PGHOST') }}"},
-        { regexp: '^login_host:.*', line: "login_host: {{ lookup('env','PGHOST') }}"},
-        { regexp: '^pg_superusers:.*', line: "pg_superusers: ['postgresm',]"},
-        { regexp: '^login_user:.*', line: "login_user: {{ lookup('env','PGUSER' ) }}"}
-      ]
+    - pg_dba_password: 'password'
+    - pg_user_password: "{{ pgpassword.stdout }}"
+    - pg_user: 'postgresu'
+    - pg_owner: 'postgresm'
+    - pg_host: "{{ lookup('env','PGHOST') }}"
     - ri_output_dir: "/tmp/output" 
   tasks:
     - name: Get the date and time
@@ -68,29 +61,31 @@
       shell: aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION
       register: pgpassword
 
-    - name: Replace attribute parameters with overrides 
-      lineinfile:
-        path: "{{ ri_profile_name }}/attributes.yaml"
-        regexp: "{{ item.regexp }}"
-        line: "{{ item.line }}"
-      with_items: "{{ ri_config_params }}"
-
-    
+    #- name: Replace attribute parameters with overrides 
+    #  lineinfile:
+    #    path: "{{ ri_profile_name }}/attributes.yaml"
+    #    regexp: "{{ item.regexp }}"
+    #    line: "{{ item.line }}"
+    #  with_items: "{{ ri_config_params }}"
+    - name: Template out the inputs file
+      template:
+        src: "/share/inputs.j2"
+        dest: "/share/{{ ri_profile_name }}/inputs.yaml"
+            
     - name: Run login command
       shell: psql -h $PGHOST -p $PGPORT "dbname=$PGDATABASE user=postgresm sslrootcert={{ temp_dir.path }}/rds-combined-ca-bundle.pem sslmode=verify-ca"
       register: pglogin
 
     - name: Debug for run visibility
       debug:
-        msg: "Run: parameter fix" 
+        msg: "Run: template approach" 
     
     - name: Run the inspec command
       shell: >
         inspec exec /share/{{ ri_profile_name }}
         --input pg_user='postgresu'
         --input pg_dba='postgresm'
-        --input pg_owner='postgresm'
-        --input-file /share/{{ ri_profile_name }}/attributes.yaml
+        --input-file /share/{{ ri_profile_name }}/inputs.yaml
         --reporter cli json:{{ ri_output_dir }}/{{ ri_profile_name }}-{{ time.stdout }}.json
 
     - name: Upload to S3

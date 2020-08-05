@@ -1,3 +1,46 @@
 20200804194502.json
 postgres-inspec-3.json
 postgres-inspec-results - Copy.json
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# logs
+*.log
+
+# Directories
+.terraform/
+.vagrant/
+
+# SSH Keys
+*.pem
+
+# Backup files
+*.bak
+
+# Ignored Terraform files
+*gitignore*.tf
+
+# Ignore Mac .DS_Store files
+.DS_Store
+
+# Ignored vscode files
+.vscode/
+
+# Ignore Any Generated JSON Files
+*/apply.json
+*/configversion.json
+*/run.template.json
+*/run.json
+*/variable.template.json
+*/variable.json
+*/workspace.template.json
+*/workspace.json
+*/create-policy.template.json
+*/create-policy.json
+*/variable.template.json
+*/variable.json
+profile-push/terraform.tfstate.1596482381.backup
+profile-push/docker/aws-rds-crunchy-data-postgresql-9-stig-baseline

@@ -2,7 +2,8 @@ FROM centos:7
 COPY aws-rds-crunchy-data-postgresql-9-stig-baseline/ /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/
 COPY pgstigcheck-inspec/ /share/pgstigcheck-inspec/
 COPY inspec.sh /share/inspec.sh
-COPY postgres_session.rb /share/postgres_session.rb
+COPY postgres_session.rb /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/libraries/postgres_session.rb
+COPY postgres_session.rb /share/pgstigcheck-inspec/libraries/postgres_session.rb
 COPY run-inspec.yml /share/run-inspec.yml
 RUN yum install -y curl postgresql unzip python3 epel-release
 RUN yum update -y

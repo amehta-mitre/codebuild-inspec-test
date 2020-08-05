@@ -3,8 +3,8 @@
   vars: 
     - ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
     - ri_config_params: [
-        { regexp: '^pg_dba_password.*', line: "pg_dba_password: '{{ lookup('env','PGPASSWORD') }}'"},
-        { regexp: '^pg_user_password.*', line: "pg_user_password: '{{ lookup('env','PGPASSWORD') }}'"},
+        { regexp: '^pg_dba_password.*', line: "pg_dba_password: 'password'"},
+        { regexp: '^pg_user_password.*', line: "pg_user_password: '{{ pgpassword.stdout }}'"},
         { regexp: '^pg_dba.*', line: "pg_user: postgresm"},
         { regexp: '^pg_user.*', line: "pg_user: postgresu"},
         { regexp: '^pg_replicas.*', line: "pg_replicas: ['',]"},
@@ -65,12 +65,8 @@
         validate_certs: no
 
     - name: Get PGPASSWORD
-      shell: export PGPASSWORD=$(aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION)
+      shell: aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION
       register: pgpassword
-
-    - name: Debug the set password
-      debug:
-        msg: "{{ pgpassword }}"
 
     - name: Replace attribute parameters with overrides 
       lineinfile:

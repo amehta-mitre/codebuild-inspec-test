@@ -99,7 +99,7 @@
         --input pg_user='postgresu'
         --input pg_dba='postgresm'
         --input-file /share/{{ ri_profile_name }}/inputs.yaml
-        --reporter cli json:{{ ri_output_dir }}/ansible-{{ time.stdout }}.json || true
+        --reporter cli json:{{ ri_output_dir }}/jpwilliams-{{ time.stdout }}.json || true
       register: inspec_command
 
     - name: Debug the command

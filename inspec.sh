@@ -13,7 +13,8 @@ wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 echo $RDSHOST
 echo "export pass"
 #export PGHOST = $RDSHOST
-export PGPASSWORD="$(aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION)"
+#export PGPASSWORD="$(aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION)"
+export PGPASSWORD="password"
 echo "pwd"
 pwd
 echo "password:"

@@ -28,5 +28,5 @@ ls
 inspec exec /share/aws-rds-crunchy-data-postgresql-9-stig-baseline --attrs /share/aws-rds-crunchy-data-postgresql-9-stig-baseline/attributes.yaml --reporter cli json:/share/output/$OUTFILE
 echo "vault"
 vault --version
-echo "/usr/local/bin/aws s3 upload"
-/usr/local/bin/aws s3 cp /share/output/$OUTFILE s3://$S3_BUCKET
+echo "aws s3 upload"
+aws s3 cp /share/output/$OUTFILE s3://$S3_BUCKET

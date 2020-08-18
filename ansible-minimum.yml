@@ -1,0 +1,51 @@
+- name: Execute commands for inspec 
+  hosts: localhost
+  vars: 
+    ri_profile_name: "aws-rds-crunchy-data-postgresql-9-stig-baseline"
+    pg_dba_password: 'password'
+    pg_user_password: "{{ pgpassword.stdout }}"
+    pg_user: 'postgresu'
+    pg_port: "{{ lookup('env','PGPORT') }}"
+    pg_dba: 'postgresm'
+    pg_host: "{{ lookup('env','PGHOST') }}"
+    pg_version: "11.6"
+    ri_output_dir: "/tmp/output" 
+  tasks:
+    
+    - name: Create output directory
+      file: 
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ ri_output_dir }}"
+        - "/share/{{ ri_profile_name }}/libraries/"
+        - "/share/pgstigcheck-inspec/libraries/"
+      tags: run-inspec
+  
+    - name: Find all .rb files for patching of postgres_session calls
+      find:
+        paths: ['/share/pgstigcheck-inspec/controls']
+        patterns: '*.rb'
+      register: inspec_control
+      tags: run-inspec
+
+    - name: Replace all postgres_session calls to include port
+      lineinfile:
+        regexp: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'))"
+        line: "postgres_session(input('pg_dba'), input('pg_dba_password'), input('pg_host'), input('pg_port'))"
+        path: '/share/{{ ri_profile_name }}/controls/overlay.rb'
+      tags: run-inspec
+
+    - name: Replace all postgres_session calls in orginal source
+      lineinfile:
+        path: "{{ item.path }}"
+        regexp: "postgres_session(pg_dba, pg_dba_password, pg_host)"
+        line: "postgres_session(pg_dba, pg_dba_password, pg_host, pg_port)"
+      with_items: 
+         - "{{ inspec_control.files }}"
+      tags: run-inspec
+  
+    - name: Template out the inputs file
+      template:
+        src: "/share/inputs.j2"
+        dest: "/share/{{ ri_profile_name }}/inputs.yaml"

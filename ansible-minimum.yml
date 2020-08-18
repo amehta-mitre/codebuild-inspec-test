@@ -11,7 +11,10 @@
     pg_version: "11.6"
     ri_output_dir: "/tmp/output" 
   tasks:
-    
+    - name: Get PGPASSWORD
+      shell: aws rds generate-db-auth-token --hostname=$RDSHOST --port=$PGPORT --username=$PGUSER --region=$REGION
+      register: pgpassword
+ 
     - name: Create output directory
       file: 
         path: "{{ item }}"

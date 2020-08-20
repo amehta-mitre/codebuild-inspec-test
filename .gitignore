@@ -1,3 +1,57 @@
+.terraform/plugins/darwin_amd64/terraform-provider-random_v2.3.0_x4
+.terraform/plugins/darwin_amd64/terraform-provider-aws_v3.0.0_x5
+.terraform/plugins/darwin_amd64/terraform-provider-random_v2.3.0_x4
+.terraform/plugins/darwin_amd64/terraform-provider-aws_v3.2.0_x5
+.terraform/plugins/darwin_amd64/lock.json
+terraform.tfstate.backup
+terraform.tfstate
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.lock.info
+
+# logs
+*.log
+
+# Directories
+.terraform/
+.vagrant/
+
+# SSH Keys
+*.pem
+secret_vars.tf
+
+# Backup files
+*.bak
+
+# Ignored Terraform files
+*gitignore*.tf
+
+# Ignore Mac .DS_Store files
+.DS_Store
+
+# Ignored vscode files
+.vscode/
+
+# Ignore Any Generated JSON Files
+*/apply.json
+*/configversion.json
+*/run.template.json
+*/run.json
+*/variable.template.json
+*/variable.json
+*/workspace.template.json
+*/workspace.json
+*/create-policy.template.json
+*/create-policy.json
+*/variable.template.json
+*/variable.json
+profile-push/terraform.tfstate.1596482381.backup
+profile-push/docker/aws-rds-crunchy-data-postgresql-9-stig-baseline
 20200804194502.json
 postgres-inspec-3.json
 postgres-inspec-results - Copy.json
